@@ -1,0 +1,18 @@
+url: http://heming-zhang.github.io
+baseurl: ""
+
+# Site Settings
+title: Heming Zhang
+description: "Heming Zhang's Page"
+keywords: "Heming Zhang, Machine Learning, Computer Science, WashU"
+collections:
+ blog:
+    name: blog
+    output: true
+ notes:
+    name: Notes
+    documentation: https://github.com/Shopify/liquid/wiki/Liquid-for-Designers
+    output: true
+
+markdown: kramdown
+exclude: ["Rakefile", "LICENSE", "readme.markdown"]
