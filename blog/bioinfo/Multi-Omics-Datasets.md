@@ -18,6 +18,10 @@ category: ml
 * CCLE
 * TCGA
 
+### 1.2 Integration technologies for multi-omics data
+* Matrix
+* Similarity
+
 <br>
 <br>
 <br>
