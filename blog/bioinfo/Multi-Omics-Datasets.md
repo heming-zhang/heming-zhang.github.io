@@ -14,9 +14,9 @@ category: ml
 <hr>
 
 ### 1.1 Common Datasets
-* GDSC
 * CCLE
 * TCGA
+* GDSC
 
 ### 1.2 Integration technologies for multi-omics data
 * Matrix
@@ -25,3 +25,17 @@ category: ml
 <br>
 <br>
 <br>
+
+## 2. CCLE dataset
+### 2.1 Transcriptomic data
+
+### 2.2 Methylation data calculation
+* [Calculation method reference in Mike Ziller's paper](https://www.nature.com/articles/nature12433)
+* [Supplementary materials for Mike Ziller's paper with detailed calculation methods](https://static-content.springer.com/esm/art%3A10.1038%2Fnature12433/MediaObjects/41586_2013_BFnature12433_MOESM65_ESM.pdf)
+
+
+
+
+## 3. TCGA dataset
+* TCGA (The Cancer Genome Atlas)
+
