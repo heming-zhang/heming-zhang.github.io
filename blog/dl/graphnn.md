@@ -13,248 +13,357 @@ category: ml
 
 * Course Material
     * Course [CS 224w: Machine Learning with Graphs](http://web.stanford.edu/class/cs224w/)
-    * Course [Video Link](https://www.youtube.com/watch?v=0eNQnc0eOB4&list=PL1OaWjIc3zJ4xhom40qFY5jkZfyO5EDOZ)
+    * Course [Video Link](https://www.youtube.com/watch?v=JAB_plj2rbA&list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn)
 
 
-## 1. Introduction and Structure of Graphs
+## 1. Introduction
 <hr>
 
-### 1.1 Components of Graph
-* Objects: nodes, vertices $N$
-* Interactions: links, edges $E$
-* System: network, graph $G(N,E)$
+### 1.1 Motivation for Graph ML
+*  Course Outline
+    * Tradtional methods: Graphlets, Graph Kernels
+    * Methods for node embeddings: DeepWalk, Node2Vec
+    * Graph Neural Network: GCN, GraphSAGE, GAT, Theory of GNNs
+    * Knowledge graphs and reasoning: TransE, BetaE
+    * Deep generative models for graphs
+    * Applications to Biomedicine, Science, Industry
 
-### 1.2 Features of Graph
-* Avg Degree $\bar{k}=\frac{1}{N}{\sum_{i=1}^{N}k_i}=\frac{2E}{N}$
-* Adjacency Matrix: Undirected and Directed Graphs
+### 1.2 Applications of Graph ML
+* Different Types of Tasks
+    * Node classification: Predict a property of a node
+    * Link prediction: Predict whether there are missing links between two nodes
+        * Ex. Knowledge graph completion
+    * Graph classification: Categorize different graphs
+        * Ex: Molecular property prediction
+    * Clustering: Detecting if nodes form a community
+    * Other tasks:
+        * Graph generation: Drug discovery
+        * Graph evolution: Physical simulation 
 
-### 1.3 Edge Attributes
-* Weight(e.g. frequency of communication)
-* Ranking(best friend, second best friend)
-* Type(friend, relative, co-worker)
-* Sign(Friend vs. Foe, Trust vs. Distrust)
+* Examples of Subgraph-level ML Tasks
+    * Ex: Traffic Prediction
 
-### 1.4 Types of Graphs
-* Unweighted; Weighted
-* Self-edges; Multigraph
+* Examples of Graph-level ML Tasks
+    * Ex: Drug Discovery
 
-
-<br>
-<br>
-<br>
-
-## 2. Properties of Networks and Random Graph Models
+## 2. Traditional Methods for ML on Graphs
 <hr>
 
-### 2.1 Notations
-* Degree Distribution: $P(k)$
-* Path Length: $h$
-* Clustering Coefficient: $C$
-* Connected Components: $s$
+### 2.3 Traditional Feature-based Methods: Graphs
+* Graph-Level Features
+    * Goal: We want features that characterize the structure of an entire graph.
 
-### 2.2 Paths in a Graph
-* Distance in a Graph
-* Network Diameter: The maximum(shortest path) distance between any pair of nodes in a graph
-* Average path length;
+* ***Kernel methods*** are widely-used for traiditonal ML for graph-level prediction.
+* Idea: Design kernels instead of feature vectors
+* A quick introduction to Kernels:
+    * Kernel $K(G,G')\in{\mathbb{R}}$ measures similarity b/w data
+    * Kernel matrix $\textit{\textbf{K}}=(K(G,G'))_{G,G'}$, must always be positive semidefinite (i.e., has positive eigenvalues)
+    * There exists a feature representation $\phi(\cdot)$ such that $K(G,G')=\phi(G)^{T}\phi(G')$
+    * Once the kernel is defined, off-the-shelf ML model, such as kernel SVM, can be used to make predictions.
 
-### 2.3 Clustering Coefficient $C_i$
-* Undirected Graph Clustering Coefficient
-    * How connected are $i$'s neighbours to each other?
-    * Node $i$ with degree $k_i$
-    * $C_i = \frac{2e_i}{k_i(k_i-1)}$, denominator show the maximum edge connections for neighbour nodes of node $i$
+* Graph Kernels: Measure similarity between two graphs:
+    * Graph Kernel
+    * Weisfeiler-Lehman Kernel
+    * Other kernels are also proposed in the literature (beyond the scope of this lecture)
+        * Random-walk kernel
+        * Shortest-path graph kernel
+        * And many more ...
+
+* Graph kernel key idea
+    * Bag-of-Words (BoW) for a graph
+        * Recall: BoW simply uses the word counts as features for documents (no ordering considered)
+        * Naive extension to a graph: Regard nodes as words.
+        * Since both graphs have 4 red nodes, we get the same feature vector for two different graphs...
+
+    * Graphlet
+        * Count the number of different graphlets in a graph
+        * Note: Definition of graphlets here is slightly different from node-level features
+        * The two differences are:
+            * Nodes in graphlets here do not need to be connected (allows for isolated nodes)
+            * The graphlets here are not rooted.
+            * Examples in the next slide illustrate this.
 
 <center>
-<img class = "large" src=".//graph/001.png" height="65%" width="65%">
+<img class="center medium" src=".//graphml/008.png" width="70%">
 </center>
 
-### 2.4 Connectivity
-* Size of largest connected component
-* Largest component = Giant Component
-
-### 2.5 Propertities of $G_{np}$
-* Degree distribution: $p(k)=C_{n-1}^{k}p^k(1-p)^{n-1-k}$
-* Clustering Coefficient of $G_{np}$: $C=p=\bar{k}/n$
-* Averge Path Length: $O(\log{n})$
-
-
-### 2.5 Small-World Model
-* Can we have high clustering while also having short paths?
+* Weisfeiler-Lehman Kernel
+    * Goal: Design an efficient graph feature descriptor $\phi(G)$
+    * Idea: Use neighborhood structure to iteratively enrich node vocabulary.
+        * Generalized version of **Bag of node degrees** since node degrees are one-hop neighborhood information.
+    * ***Color refinement*** algorithm:
+        * Given a graph $G$ with a set of nodes $V$.
+            * Assign an initial color $c^{(0)}(v)$ to each node $v$.
+            * Iteratively refine node colors by
+            $$c^{(k+1)}(v)=\text{HASH}(\{c^{(k)}(v),\{c^{(k)(u)}\}_{u\in{N(v)}}  \})$$
+            * where $\text{HASH}$ maps different inputs to different colors
+            * After $K$ steps of color refinement, $c^{(K)}(v)$ summarizes the structure of $K$-hop neighborhood
 
 <center>
-<img class = "large" src=".//graph/002.png" height="65%" width="65%">
+<img class="center medium" src=".//graphml/009.png" width="70%">
 </center>
 
+<center>
+<img class="center medium" src=".//graphml/010.png" width="70%">
+</center>
 
-<br>
-<br>
-<br>
+<center>
+<img class="center medium" src=".//graphml/011.png" width="70%">
+</center>
 
-## 3. Motifs and Structure Roles in Networks
-<hr>
+<center>
+<img class="center medium" src=".//graphml/012.png" width="70%">
+</center>
 
-### 3.1 Subnetwork
-### 3.2 Network Motifs
-* Motif: Recurring, Significant, Patterns of interconnections
-* And motif occur in the real network more often than the random network.
-* $Z_i$ captures the siginificance of motif i
-* Network Significance Profile(SP):
+<center>
+<img class="center medium" src=".//graphml/013.png" width="70%">
+</center>
+
+<center>
+<img class="center medium" src=".//graphml/014.png" width="70%">
+</center>
+
+* Weisfeiler-Lehman Kernel
+    * WL kernel is computationally efficient
+        * The time complexity for color refinement at each step is linear in #(edges), since it involves aggregating neighboring colors.
     
-### 3.3 Graphlets
-* Graph Degree Vector
-* Automorphism Orbits
-
-### 3.4 Graph Isomophism
-* Example: Are $G$ and $H$ topologically equivalent?
-
-<br>
-<br>
-<br>
-
-## 4. Graph Representation Learning
-<hr>
-
-Following fields are **Graph Representation Learning** focused on:
-* Node Classification
-* Link Prediction
-
-### 4.1 Feature Learning in Graphs
-* Feature Representation Embedding
-* Task: Map each node in a network into a low-dimensional space
-
-### 4.2 Node Embedding
-* CNN for fixed-size images/grids
-* RNNs or word2vec for text/sequences
-
-### 4.3 Embedding Nodes Task
-<center>
-<img class = "large" src=".//graph/004.png" height="65%" width="65%">
-</center>
-
-Hence, we can analyse the similarity of those nodes in space, and we have many approaches to measure the distance like Eucliden Distance, Cos Vector etc. In this way, we can just use the 
-
-### 4.4 Random Walk Approaches to Node Embeddings
-* $z_u^{T}z_v$ probability that $v$ and $u$ co-occur on a random walk over the network
-
-### 4.5 Unsupervised Feature Learning
-<center>
-<img class = "large" src=".//graph/005.png" height="65%" width="65%">
-</center>
-
-<center>
-<img class = "large" src=".//graph/006.png" height="65%" width="65%">
-</center>
-
-<br>
-<br>
-<br>
-
-## 5. Graph Neural Network
-<hr>
-
-### [Lecture video](https://www.youtube.com/watch?v=7JELX6DiUxQ)
-### 5.1 Nodes Embeddings
-<center>
-<img class = "large" src=".//graph/007.png" height="65%" width="65%">
-</center>
-
-* Two Key Components:
-    * Encoder
-    * Similarity Function
-
-### 5.2 Basics of Deep Learning for Graphs
-* Idea: Neighbourhood Aggregation
-<center>
-<img class = "large" src=".//graph/008.png" height="65%" width="65%">
-</center>
-
-* Final layer $h^{K}_{v}$ is embedding of $\mathbf{z}_{v}$
-* Train the Model
-    * $\mathbf{W}_{k}$
-    * $\mathbf{B}_{k}$
-* Inductive Capability
-* So far, the GraphNN aggregate the neighbour messages by taking their(weighted) average 
-
-### 5.3 GraphSAGE Graph Neural Network Architecture
-* Concatenece:
-    * Concatenate neighbour embedding and self embedding
-    * Unlike Graph Convolution with adding itself, we just concatenate itself features then activate with non-linearity function
-* Aggregation:
-    * Use generalized aggregation function
-    * Unlike Graph Convolution with just average
-
-<center>
-<img class = "large" src=".//graph/009.png" height="65%" width="65%">
-</center>
-
-* Aggregation Variants
-    * Generally, there are several ways to implement aggregate
-    * Mean
-    * Pool (mean or max across a coordinate)
-    * LSTM (make model much deeper with LSTM)
-<center>
-<img class = "large" src=".//graph/010.png" height="65%" width="65%">
-</center>
-Hints: we can apply different pooling startegies
-
-### 5.4 Implementation
-<center>
-<img class = "large" src=".//graph/011.png" height="65%" width="65%">
-</center>
-
-* Notation:
-    * $D$ is degree matrix
-    * $A$ is adjeacent matrix
-    * $H^{k-1}$ is message matrix from previous layer
-
-* $D^{-1}$ matrix acts as a mean function in this formula.
-* $AH^{k-1}$ is aimed to sum all neighbour features
-
-### 5.5 Graph Attention Network (GAT)
-* Simple Neighbourhood Aggregation in Graph Convolution
-    * Use coefficient of ${\alpha}_{vu}$
-    * All neighbour $u \in {N}(v)$ are equally important to node $v$
-<center>
-<img class = "large" src=".//graph/012.png" height="65%" width="65%">
-</center>
-
-* Attention Mechanism
-    * Use $e_{vu}$ as coefficient
-    * Mechanism $a$ may achieve in different ways including Simple Single-Layer Neural Network
-<center>
-<img class = "large" src=".//graph/013.png" height="65%" width="65%">
-</center>
-
-<center>
-<img class = "large" src=".//graph/014.png" height="65%" width="65%">
-</center>
-
-### 5.6 Papers on GNN
-* Tutoiral and Overviews
-
-    * [Relational inductive biases and graph networks (Battaglia et al., 2018)](https://arxiv.org/pdf/1806.01261.pdf)
-    * [Representation learning on graphs: Methods and applications (Hamilton et al., 2017)](https://arxiv.org/pdf/1709.05584.pdf)
-
-* Attention-based neighborhood aggregation
-    * [VAIN: Attentional Multi-agent Predictive Modeling (Hoshen, 2017)](https://papers.nips.cc/paper/6863-vain-attentional-multi-agent-predictive-modeling.pdf)
-    * [Graph Attention Networks (Velickovic et al., 2018)](https://arxiv.org/pdf/1710.10903.pdf)
-    * [Jointly Multiple Events Extraction via Attention-based Graph Information Aggregation (Liu et al., 2018)](https://arxiv.org/pdf/1809.09078.pdf)
-
-* Embedding entire graphs
-    * [Hierarchical Graph Representation Learning withDifferentiable Pooling(Ying et al., 2018)](http://papers.nips.cc/paper/7729-hierarchical-graph-representation-learning-with-differentiable-pooling.pdf)
-    * [GraphRNN: Generating Realistic Graphs with Deep Auto-regressive Models(You et al., 2018)](https://arxiv.org/pdf/1802.08773.pdf)
-    * [Neural Relational Inference for Interacting Systems(Kipfet al., 2018)](https://arxiv.org/pdf/1802.04687.pdf)
-    * [How powerful are graph neural networks (Xu et al., 2017)](https://arxiv.org/pdf/1810.00826.pdf)
-
-* Embedding nodes:
-    * [Representation Learning on Graphs with Jumping Knowledge Networks (Xu et al., 2018)](https://arxiv.org/pdf/1806.03536.pdf)
-    * [Position-aware GNN (You et al. 2019)](https://arxiv.org/pdf/1906.04817.pdf)
-
-* Spectral approaches to graph neural networks:
-    * [Deep Convolutional Networks on Graph-Structured Data (Bruna et al. 2015)](https://arxiv.org/pdf/1506.05163.pdf)
-    * [Convolutional Neural Networks on Graphswith Fast Localized Spectral Filtering (Defferrard et al., 2016)](http://papers.nips.cc/paper/6081-convolutional-neural-networks-on-graphs-with-fast-localized-spectral-filtering.pdf)
-    * [Geometric deep learning:going beyond Euclidean data (Bronstein et al., 2017)](https://arxiv.org/pdf/1611.08097.pdf)
-    * [Geometric deep learning on graphs and manifolds using mixture model CNNs (Monti et al., 2017)](http://openaccess.thecvf.com/content_cvpr_2017/papers/Monti_Geometric_Deep_Learning_CVPR_2017_paper.pdf)
+    * When computing a kernel value, only colors appeared in the two graphs need to be tracked.
+        * Thus, #(colors) is at most the total number of nodes.
     
-* Other GNN Techniques
-    * [Pre-Training Graph Neural Networks for Generic Structural Feature Extraction (Hu et al., 2019)](https://arxiv.org/pdf/1905.12265.pdf)
-    * [GNNExplainer: Generating Explanationsfor Graph Neural Networks (Ying et al., 2019)](http://papers.nips.cc/paper/9123-gnnexplainer-generating-explanations-for-graph-neural-networks.pdf)
+    * Counting colors takes linear-time w.r.t. #(nodes).
+
+    * In total, time complexity is linear in #(edges).
+
+* Graph-Level Features: Summary
+    * Graphlet Kernel
+        * Graph is represented as **Bag-of-graphlets**
+        * Computationally expensive
+    * Weisfeiler-Lehman Kernel
+        * Apply $K$-step color refinement algorithm to enrich node colors
+            * Different colors capture different $K$-hop neighborhood structures
+        * Graph is represented as **Bag-of-colors**
+        * **Computationally efficient**
+        * Closely related to Graph Neural Network
+
+## 8. Application of Graph Neural Networks
+<hr>
+
+### 8.1 Graph Augmentation for GNNs
+* General GNN Framework
+    * Idea: Raw input graph $\neq$ computational graph
+        * Graph feature augmentation
+        * Graph structure augmentation
+    
+* Why Augment Graphs
+    * Our assumption so far has been
+        * Raw input graph = computational graph
+
+    * Reasoning for breaking this assumption
+        * Features:
+            * This input graph lacks features
+        
+        * Graph structure:
+            * The graph is too sparse -> inefficient message passing
+            * The graph is too dense -> message passing is too costly
+            * The graph is too large -> cannot fit the computational graph into a GPU
+        
+    * It is unlikely that the input graph happens to be the optional computation graph for embeddings
+
+* Graph Augmentation Approaches
+    * Graph feature augmentation
+        * The input graph lacks features -> feature augmentation
+    
+    * Graph structure augmentation
+        * The graph is too sparse -> Add virtual nodes / edges
+        * The graph is too dense -> Sample neighbors when doing message passing
+        * The graph is too large -> Sample subgraphs to compute embeddings
+
+* Add Virtual Nodes / Edges
+    * Motivation: Augment sparse graphs
+    * (1) Add virtual edges
+        * Common approach: Connect 2-hop neighbors via virtual edges
+        * Intuition: Instead of using adj. matrix $A$ for GNN computation, use $A+A^2$
+    
+    * Use cases: Biparite graphs
+        * Author-to-papers (they authored)
+        * 2-hop virtual edges make an author-author collaboration graph
+    
+<center>
+<img class="center medium" src=".//graphml/001.png" width="30%">
+</center>
+
+* Add Virtual Nodes / Edges
+    * (2) Add virtual nodes
+        * The virtual node will connect to all the nodes in the graph
+            * Suppose in a sparse graph, two nodes have shortest path distance of 1o
+            * After adding the virtual node, all the nodes will have a distance of two
+                * Node A - Virtual node - Node B
+            
+        * Benefits: Greatly improves message passing in sparse graphs
+
+<center>
+<img class="center medium" src=".//graphml/002.png" width="30%">
+</center>
+
+* GNN Training Pipelines
+<center>
+<img class="center medium" src=".//graphml/003.png" width="70%">
+</center>
+
+* Prediction Heads: Graph-level
+    * (1) Global mean pooling
+    * (2) Global max pooling
+    * (3) Global sum pooling
+
+* Issue of Global Pooling
+    * Issue: Global pooling over a (large) graph will lose information
+    * Solution: DiffPool
+
+<center>
+<img class="center medium" src=".//graphml/004.png" width="90%">
+</center>
+
+## 9. Theory of Graph Neural Networks
+<hr>
+
+### 9.1 How expressive are GNNs?
+* What is the expressive power (ability to distinguish different graph structures) of these GNN models?
+    * Ex: GNN won't be able to distinguish nodes 1 and 2
+
+<center>
+<img class="center medium" src=".//graphml/005.png" width="80%">
+</center>
+
+<center>
+<img class="center medium" src=".//graphml/006.png" width="70%">
+</center>
+
+### 9.2 Design the Most Powerful GNNs
+* Our goal: Design maximally powerful GNNs in the class of message-passing GNNs
+* This can be achieved by designing injective neighbor aggregation function over multi-sets.
+* Here, we design a neural network that can model injective multiset function.
+
+* Universral Approximation Theorem
+    * Cited from [Hornik et al., 1989]
+    * We have arrived at a neural network that can model any injective multiset function
+
+* Graph Isomorphism Network (GIN)
+    * Apply an MLP, element-wise sum, followed by another MLP
+
+$$\text{MLP}_{\Phi}(\sum_{x\in{S}}{\text{MLP}_{f}(x)})$$
+
+* Full Model of GIN
+    * We now describe the full model of GIN by relating it to WL graph kernel (traditional way of obtaining graph-level features).
+
+<center>
+<img class="center medium" src=".//graphml/007.png" width="70%">
+</center>
+
+* GIN and WL Graph Kernel
+    * GIN can be understood as differentiable neural version of the WL graph Kernel
+
+    * Advantages of GIN over the WL graph kernel are:
+        * Node embeddings are low-dimensional; hence, they can capture the fine-grained similarity of different nodes.
+        * Paraemters of the update function can be learned for the downstream tasks.
+
+* Expressive Power of GIN
+    * Because of the relation between GIN and the WL graph kernel, their expressive is exactly the same.
+        * If two graphs can be distinguished by GIN, they can be also distinguished by the WL kernel, and vice versa.
+
+* Summary of the lecture
+    * We design a neural network that can model injective multi-set function
+    * We use the neural network for neighbor aggregration function and arrive at GIN--the most expressive GNN model.
+    * The key is to use **element-wise sum pooling**, instead of mean-/max-pooling.
+    * GIN is closely related to the WL graph kernel.
+    * Both GIN and WL graph kernel can distinguish most of the real graphs!
+
+## 10. Heterogenous Graphs and Knowledge Graph Embeddings
+<hr>
+
+### 10.1 Heterogeneous Graphs and Relational GCN (RGCN)
+* Heterogeneous Graphs
+    * A heterogeneous graph is defined as
+    $$G=(V,E,R,T)$$
+    * Nodes with node types $v_i\in{V}$
+    * Edges with relation types $(v_i,r,v_j)\in{E}$
+    * Node type $T(v_i)$
+    * Relation type $r\in{R}$
+
+* Example
+
+<center>
+<img class="center medium" src=".//graphml/015.png" width="80%">
+</center>
+
+* RGCN for Link Prediction
+<center>
+<img class="center medium" src=".//graphml/016.png" width="80%">
+</center>
+
+### 10.2 Knowledge Graphs: KG Completion with Embeddings
+* Knowledge Graphs (KG) is an example of a heterogeneous graph
+
+* Example: Bibliographic Networks
+<center>
+<img class="center medium" src=".//graphml/018.png" width="70%">
+</center>
+
+### 10.3 Knowledge Graph Completion: TransE, TransR, DistMul, ComplEx
+* KG Representation
+    * Edges in KG are represented as triples $(h,r,t)$
+        * head $(h)$ has relation $(r)$ with tail $(t)$
+    * Key Idea:
+        * Model entities and relations in the embedding/vector space $\mathbb{R}^{d}$.
+            * Associtate entities and relations with shallow embeddings
+            * Note we do not learn a GNN here!
+        * Given a true triple $(h,r,t)$, the goal is that the embedding of $(h,r)$ should be close to the embedding of $t$.
+            * How to embed $(h,r)$?
+            * How to define closeness?
+
+* Relations Patterns
+<center>
+<img class="center medium" src=".//graphml/023.png" width="70%">
+</center>
+
+* TransE Learning Algorithm
+<center>
+<img class="center medium" src=".//graphml/019.png" width="70%">
+</center>
+
+<center>
+<img class="center medium" src=".//graphml/020.png" width="70%">
+</center>
+
+* TransR Learning Algorithm
+<center>
+<img class="center medium" src=".//graphml/021.png" width="70%">
+</center>
+
+* DistMult Algorithm
+    * DistMult: Entities and relations using vectors in $\mathbb{R}^{k}$
+    * Score function: $f_{r}(h,t)=<\textbf{h,r,t}>=\sum_{i}{\textbf{h}_{i}\cdot{\textbf{r}_{i}}\cdot{\textbf{t}_{i}}}$
+        * $\textbf{h,r,t}\in{\mathbb{R}^{k}}$
+    * Intuition of the **score function**: Can be viewed as a cosine similarity between $\textbf{h}\cdot{\textbf{r}}$ and $\textbf{t}$
+        * where $\textbf{h}\cdot{\textbf{r}}$ is defined as $\sum_{i}{\textbf{h}_{i}\cdot{\textbf{r}_{i}}}$
+    
+* Knowledge Graph Completion: ComplEx
+    * Based on Distmult, **ComplEx** embeds entities and relations in **Complex vector space**
+    * **ComplEx**: model entities and relations using vectors in $\mathbb{C}^{k}$
+
+* Expresiveness of All Models
+<center>
+<img class="center medium" src=".//graphml/024.png" width="70%">
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
