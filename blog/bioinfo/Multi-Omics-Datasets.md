@@ -36,6 +36,15 @@ category: ml
 
 
 
+
+
+
+
+
 ## 3. TCGA dataset
 * TCGA (The Cancer Genome Atlas)
+
+### 3.1 UCSC xena browser
+* [DNA methylation](https://xenabrowser.net/datapages/?dataset=jhu-usc.edu_PANCAN_HumanMethylation450.betaValue_whitelisted.tsv.synapse_download_5096262.xena&host=https%3A%2F%2Fpancanatlas.xenahubs.net&removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443)
+
 

@@ -17,5 +17,4 @@ category: deep learning
 
 We can also check the virtual environment python version.
 
-### Working Remotely
-* 
+### Working Remotely On RIS
