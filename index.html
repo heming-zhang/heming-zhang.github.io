@@ -545,7 +545,35 @@
 	<script>hljs.initHighlightingOnLoad();</script>
 	<script async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
 
+	<!-- Force page to start at the top on refresh -->
+    <script>
+        (function () {
+            // Prevent browser from restoring previous scroll position
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+
+            // If this load is a reload, remove any hash and scroll to top
+            var nav = performance.getEntriesByType && performance.getEntriesByType('navigation');
+            var isReload = nav && nav[0] ? nav[0].type === 'reload'
+                : (performance.navigation && performance.navigation.type === 1);
+
+            if (isReload) {
+                if (location.hash) {
+                    // Strip hash so the browser doesn't auto-jump to an anchor
+                    history.replaceState(null, document.title, location.pathname + location.search);
+                }
+                window.scrollTo(0, 0);
+            }
+
+            // Handle BFCache restores (back/forward)
+            window.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                    window.scrollTo(0, 0);
+                }
+            });
+        })();
+    </script>
 
 </body>
-
 </html>
