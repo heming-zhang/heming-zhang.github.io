@@ -16,18 +16,38 @@
 	<link rel="stylesheet" href="/css/academicons.min.css">
 	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather%7CRoboto+Mono">
 	<link rel="stylesheet" href="/css/hugo-academic.css">
-	<link rel="alternate" href="https://heming-zhang.github.io/index.xml" type="application/rss+xml" title="Heming Zhang">
-	<link rel="feed" href="https://heming-zhang.github.io/index.xml" type="application/rss+xml" title="Heming Zhang">
+	<link rel="alternate" href="https://heming-zhang.github.io/index.xml" type="application/rss+xml"
+		title="Heming Zhang">
+	<link rel="feed" href="https://heming-zhang.github.io/index.xml" type="application/rss+xml"
+		title="Heming Zhang">
 	<link rel="icon" type="image/png" href="/img/icon.png">
 	<link rel="apple-touch-icon" type="image/png" href="/img/apple-touch-icon.png">
 	<link rel="canonical" href="https://heming-zhang.github.io/">
+
+	<style>
+		/* Keep text to roughly 120 characters per line and prevent overflow. */
+		.home-section p,
+		.home-section [itemprop="name"],
+		.home-section .pub-authors,
+		.home-section .pub-paper,
+		.home-section .project-date,
+		.home-section .project-funding {
+			max-inline-size: 120ch;
+			overflow-wrap: anywhere;
+			word-break: break-word;
+		}
+
+		.home-section [itemprop="name"] {
+			display: block;
+		}
+	</style>
 
 	<script>
 		var _hmt = _hmt || [];
 		(function() {
 		  var hm = document.createElement("script");
 		  hm.src = "https://hm.baidu.com/hm.js?5fcc7b5d845c852fd7389ff9948897b6";
-		  var s = document.getElementsByTagName("script")[0]; 
+		  var s = document.getElementsByTagName("script")[0];
 		  s.parentNode.insertBefore(hm, s);
 		})();
 	</script>
@@ -139,60 +159,16 @@
 
 					<h1 id="about">About</h1>
 					<p>
-					I am a PhD candidate at Washington University School of Medicine (WUSM) focused on Agentic AI, Large Reasoning Models (LRMs), and precision medicine. Working with <a href="https://profiles.wustl.edu/en/persons/fuhai-li">Dr. Fuhai Li</a> and <a href="https://genetics.wustl.edu/people/michael-province-phdprofessor-and-director-division-of-statistical-genetics-dsg/">Dr. Michael Province</a>, I developed a biomedical AI ecosystem for multi-omics integration and analysis; and AI Co-Scientist Agent to enable RL-guided knowledge-grounded reasoning for target/drug hypothesis generation. I also worked with <a href="https://physicians.wustl.edu/people/h-henry-lai-md/">H. Henry Lai, MD</a> on lower urinary tract symptoms (LUTS) outcomes modeling and with <a href="https://dinglab.wustl.edu/people">Dr. Li Ding</a> on multi-omics integration and analysis for pancreatic ductal adenocarcinoma (PDAC).
-					</p>
-					<p>
-					I earned my M.S. in Computer Science from Washington University in St. Louis in 2021. During my master’s, I joined <a href="https://profiles.wustl.edu/en/persons/fuhai-li">Dr. Fuhai Li</a>’s lab at the <a href="https://informatics.wustl.edu/">Institute for Informatics</a>, applying computational and deep learning methods—especially graph neural networks—to analyze cell-signaling interactions and predict drug-combination effects.
-					</p>
-					<p>
-					I completed my B.S. in Information Systems at Central China Normal University (CCNU) in 2019 as a “Boya” Plan student and was recognized as an “Outstanding Graduate,” focusing my early research on text mining.
-					</p>
-					<p>
-					In 2018, supported by a <a href="https://www.mitacs.ca/en">Mitacs</a> fellowship, I was a <a href="https://students.ubc.ca/about-student-services/go-global/coming-ubc-study-abroad/visiting-international-research-virs">VIRS</a> research scholar at the University of British Columbia (UBC) under the supervision of <a href="https://www.cs.ubc.ca/~bestchai/">Dr. Ivan Beschastnikh</a>, working on systems and machine learning.
+						I earned my Ph.D. in Biomedical Informatics and Data Science and M.S. in Computer Science at
+						Washington University focused on Agentic AI, Large Reasoning Models (LRMs), and precision
+						medicine. Working with
+						<a href="https://profiles.wustl.edu/en/persons/fuhai-li">Dr. Fuhai Li</a> and
+						<a href="https://profiles.wustl.edu/en/persons/michael-province/">Dr. Michael Province</a>,
+						I developed a biomedical AI ecosystem for multi-omics integration and analysis; and AI
+						Co-Scientist Agent to enable RL-guided knowledge-grounded reasoning for target/drug
+						hypothesis generation.
 					</p>
 
-
-					<div class="row">
-						<div class="col-sm-5">
-							<h3>Interests</h3>
-							<ul class="ul-interests">
-								<li>Agentic AI</li>
-								<li>Large Reasoning Model</li>
-								<li>Precision Medicine</li>
-							</ul>
-						</div>
-
-						<div class="col-sm-7">
-							<h3>Education</h3>
-							<ul class="ul-edu fa-ul">
-								<li>
-									<i class="fa-li fa fa-graduation-cap"></i>
-									<div class="description">
-										<p class="course">PhD Candidate in Biomedical Informatics and Data Science (BIDS), 2021 - present</p>
-										<p class="institution"><i>Supervised by Dr. Fuhai Li</i></p>
-										<p class="institution">Washington University School of Medicine</p>
-									</div>
-								</li>
-								
-								<li>
-									<i class="fa-li fa fa-graduation-cap"></i>
-									<div class="description">
-										<p class="course">M.S. in Computer Science, 2019 - 2021</p>
-										<p class="institution"><i>Co-Supervised by Dr. Fuhai Li and Dr. Yixin Chen</i></p>
-										<p class="institution">Washington University in St. Louis</p>
-									</div>
-								</li>
-
-								<li>
-									<i class="fa-li fa fa-graduation-cap"></i>
-									<div class="description">
-										<p class="course">B.S. in Information Systems, 2015 - 2019</p>
-										<p class="institution">Central China Normal University</p>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -210,15 +186,19 @@
 					<ol class="fa-ol" style="list-style-type: none;">
 						<li itemscope itemtype="http://schema.org/CreativeWork">
 							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">GALAX: Graph-Augmented Language Model for Explainable Reinforcement-Guided Subgraph Reasoning in Precision Medicine</span>
+							<span itemprop="name">
+								GALAX: Graph-Augmented Language Model for Explainable Reinforcement-Guided Subgraph
+								Reasoning in Precision Medicine
+							</span>
 							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
-								<b>Heming Zhang</b>, Di Huang, Wenyu Li, Michael A. Province, Yixin Chen, Philip R.O. Payne, Fuhai Li
+								<b>Heming Zhang</b>, Di Huang, Wenyu Li, Michael A. Province, Yixin Chen,
+								Philip R.O. Payne, Fuhai Li
 							</div>
 							<div class="pub-paper" style="color:#009900;font-size:17px">
 								ICLR 2026
 							</div>
 							<div>
-								<a class="btn btn-primary btn-outline btn-xs" href="https://arxiv.org/pdf/2509.20935">PDF</a>
+								<a class="btn btn-primary btn-outline btn-xs" href="https://openreview.net/pdf?id=ADFXCeYXvR">PDF</a>
 								<a class="btn btn-primary btn-outline btn-xs" href="https://github.com/FuhaiLiAiLab/GALAX">Code</a>
 							</div>
 							<p></p>
@@ -226,12 +206,16 @@
 
 						<li itemscope itemtype="http://schema.org/CreativeWork">
 							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">OmniCellTOSG: The First Cell Text-Omic Signaling Graphs Dataset for Graph Language Foundation Modeling</span>
+							<span itemprop="name">
+								OmniCellTOSG: The First Cell Text-Omic Signaling Graphs Dataset for Graph Language
+								Foundation Modeling
+							</span>
 							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
-								<b>Heming Zhang*</b>, Tim Xu*, Dekang Cao*, Shunning Liang, Lars Schimmelpfennig, Levi Kaster, Di Huang, Carlos Cruchaga, et al., Philip Payne, Fuhai Li
+								<b>Heming Zhang*</b>, Tim Xu*, Dekang Cao*, Shunning Liang, Lars Schimmelpfennig,
+								Levi Kaster, Di Huang, Carlos Cruchaga, et al., Philip Payne, Fuhai Li
 							</div>
 							<div class="pub-paper" style="color:#009900;font-size:17px">
-								arXiv Preprint, April 2025 (Submitted to Nature Methods, in Review)
+								arXiv Preprint, October 2025 (Submitted to Nature Communications, in Review)
 							</div>
 							<div>
 								<a class="btn btn-primary btn-outline btn-xs" href="https://arxiv.org/pdf/2504.02148">PDF</a>
@@ -242,15 +226,19 @@
 
 						<li itemscope itemtype="http://schema.org/CreativeWork">
 							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">BioMedGraphica: An All-in-One Platform for Biomedical Prior Knowledge and Omic Signaling Graph Generation</span>
+							<span itemprop="name">
+								BioMedGraphica: An All-in-One Platform for Biomedical Prior Knowledge and Omic
+								Signaling Graph Generation
+							</span>
 							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
-								<b>Heming Zhang*</b>, Shunning Liang*, Tim Xu*, Wenyu Li, Di Huang, Yuhan Dong, et al., Carlos Cruchaga, Yixin Chen, Michael Province, Philip Payne, Fuhai Li
+								<b>Heming Zhang*</b>, Shunning Liang*, Tim Xu*, Wenyu Li, Di Huang, Yuhan Dong,
+								et al., Carlos Cruchaga, Yixin Chen, Michael Province, Philip Payne, Fuhai Li
 							</div>
 							<div class="pub-paper" style="color:#009900;font-size:17px">
-								bioRxiv Preprint, September 2025 (Submitted to Bioinformatics, in Revision)
+								Bioinformatics, May 2026
 							</div>
 							<div>
-								<a class="btn btn-primary btn-outline btn-xs" href="https://www.biorxiv.org/content/10.1101/2024.12.05.627020v2">PDF</a>
+								<a class="btn btn-primary btn-outline btn-xs" href="https://doi.org/10.1093/bioinformatics/btag355">PDF</a>
 								<a class="btn btn-primary btn-outline btn-xs" href="https://github.com/FuhaiLiAiLab/BioMedGraphica">Code</a>
 							</div>
 							<p></p>
@@ -258,30 +246,39 @@
 
 						<li itemscope itemtype="http://schema.org/CreativeWork">
 							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">OmniCellAgent: Towards AI Co-Scientists for Scientific Discovery in Precision Medicine</span>
+							<span itemprop="name">
+								OmniCellAgent: Towards AI Co-Scientists for Scientific Discovery in Precision Medicine
+							</span>
 							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
-								Di Huang*, Hao Li*, Wenyu Li*, <b>Heming Zhang*</b>, et al., Carlos Cruchaga, Michael Province, Yixin Chen, Philip Payne, Fuhai Li
+								Di Huang*, Hao Li*, Wenyu Li*, <b>Heming Zhang*</b>, et al., Carlos Cruchaga,
+								Michael Province, Yixin Chen, Philip Payne, Fuhai Li
 							</div>
 							<div class="pub-paper" style="color:#009900;font-size:17px">
 								bioRxiv Preprint, August 2025
 							</div>
 							<div>
-								<a class="btn btn-primary btn-outline btn-xs" href="https://www.biorxiv.org/content/10.1101/2025.07.31.667797v1.full.pdf">PDF</a>
+								<a class="btn btn-primary btn-outline btn-xs"
+									href="https://www.biorxiv.org/content/10.1101/2025.07.31.667797v1.full.pdf">PDF</a>
 							</div>
 							<p></p>
 						</li>
 
 						<li itemscope itemtype="http://schema.org/CreativeWork">
 							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">M3NetFlow: a novel multi-scale multi-hop modular graph AI model for multi-omics data integration and signaling network inference</span>
+							<span itemprop="name">
+								M3NetFlow: a novel multi-scale multi-hop modular graph AI model for multi-omics data
+								integration and signaling network inference
+							</span>
 							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
-								<b>Heming Zhang</b>, Peter Goedegebuure, Li Ding, William Hawkins, David DeNardo, Ryan Fields, Yixin Chen, Fuhai Li
+								<b>Heming Zhang</b>, Peter Goedegebuure, Li Ding, William Hawkins, David DeNardo,
+								Ryan Fields, Yixin Chen, Fuhai Li
 							</div>
 							<div class="pub-paper" style="color:#009900;font-size:17px">
 								iScience, February 2025
 							</div>
 							<div>
-								<a class="btn btn-primary btn-outline btn-xs" href="https://www.cell.com/iscience/fulltext/S2589-0042(25)00180-4">PDF</a>
+								<a class="btn btn-primary btn-outline btn-xs"
+									href="https://www.cell.com/iscience/fulltext/S2589-0042(25)00180-4">PDF</a>
 								<a class="btn btn-primary btn-outline btn-xs" href="https://github.com/FuhaiLiAiLab/M3NetFlow">Code</a>
 							</div>
 							<p></p>
@@ -289,7 +286,9 @@
 
 						<li itemscope itemtype="http://schema.org/CreativeWork">
 							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">GraphSeqLM: A Unified Graph Language Framework for Omic Graph Learning</span>
+							<span itemprop="name">
+								GraphSeqLM: A Unified Graph Language Framework for Omic Graph Learning
+							</span>
 							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
 								<b>Heming Zhang</b>, Di Huang, Yixin Chen, Fuhai Li
 							</div>
@@ -303,24 +302,13 @@
 							<p></p>
 						</li>
 
-						<li itemscope itemtype="http://schema.org/CreativeWork">
-							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">mosGraphFlow: a novel integrative graph AI model mining disease targets from multi-omic data</span>
-							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
-								<b>Heming Zhang</b>, Dekang Cao, Tim Xu, Emily Chen, Guangfu Li, Yixin Chen, Philip Payne, Michael Province, Fuhai Li
-							</div>
-							<div class="pub-paper" style="color:#009900;font-size:17px">
-								BMC Methods 2025
-							</div>
-							<div>
-								<a class="btn btn-primary btn-outline btn-xs" href="https://www.biorxiv.org/content/10.1101/2024.08.01.606219v2.full.pdf">PDF</a>
-							</div>
-							<p></p>
-						</li>
 
 						<li itemscope itemtype="http://schema.org/CreativeWork">
 							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">Using DeepSignalingFlow to mine signaling flows interpreting mechanism of synergy of cocktails</span>
+							<span itemprop="name">
+								Using DeepSignalingFlow to mine signaling flows interpreting mechanism of synergy of
+								cocktails
+							</span>
 							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
 								<b>Heming Zhang</b>, Yixin Chen, Philip R Payne, Fuhai Li
 							</div>
@@ -336,15 +324,20 @@
 
 						<li itemscope itemtype="http://schema.org/CreativeWork">
 							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">mosGraphGen: a novel tool to generate multi-omic signaling graphs to facilitate integrative and interpretable graph AI model development</span>
+							<span itemprop="name">
+								mosGraphGen: a novel tool to generate multi-omic signaling graphs to facilitate
+								integrative and interpretable graph AI model development
+							</span>
 							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
-								<b>Heming Zhang*</b>, Dekang Cao*, Zirui Chen, Ziyuan Zhang, Yixin Chen, Cole Sessions, et al., Guangfu Li, Michael Province, Fuhai Li
+								<b>Heming Zhang*</b>, Dekang Cao*, Zirui Chen, Ziyuan Zhang, Yixin Chen,
+								Cole Sessions, et al., Guangfu Li, Michael Province, Fuhai Li
 							</div>
 							<div class="pub-paper" style="color:#009900;font-size:17px">
 								Bioinformatics Advances, 2024
 							</div>
 							<div>
-								<a class="btn btn-primary btn-outline btn-xs" href="https://academic.oup.com/bioinformaticsadvances/article/4/1/vbae151/7815723">PDF</a>
+								<a class="btn btn-primary btn-outline btn-xs"
+									href="https://academic.oup.com/bioinformaticsadvances/article/4/1/vbae151/7815723">PDF</a>
 								<a class="btn btn-primary btn-outline btn-xs" href="https://github.com/FuhaiLiAiLab/mosGraphGen">Code</a>
 							</div>
 							<p></p>
@@ -352,22 +345,10 @@
 
 						<li itemscope itemtype="http://schema.org/CreativeWork">
 							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">Interpreting the Mechanism of Synergism for Drug Combinations Using Attention-Based Hierarchical Graph Pooling</span>
-							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
-								Zehao Dong, <b>Heming Zhang</b>, Yixin Chen, Philip R Payne, Fuhai Li
-							</div>
-							<div class="pub-paper" style="color:#009900;font-size:17px">
-								Cancers, August 2023
-							</div>
-							<div>
-								<a class="btn btn-primary btn-outline btn-xs" href="https://www.mdpi.com/2072-6694/15/17/4210">PDF</a>
-							</div>
-							<p></p>
-						</li>
-
-						<li itemscope itemtype="http://schema.org/CreativeWork">
-							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">Predicting anti-cancer drug response with deep learning constrained by signaling pathways</span>
+							<span itemprop="name">
+								Predicting anti-cancer drug response with deep learning constrained by signaling
+								pathways
+							</span>
 							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
 								<b>Heming Zhang</b>, Yixin Chen, Fuhai Li
 							</div>
@@ -375,7 +356,8 @@
 								Frontiers in Bioinformatics, 2021
 							</div>
 							<div>
-								<a class="btn btn-primary btn-outline btn-xs" href="https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2021.639349/full">PDF</a>
+								<a class="btn btn-primary btn-outline btn-xs"
+									href="https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2021.639349/full">PDF</a>
 								<a class="btn btn-primary btn-outline btn-xs" href="https://github.com/FuhaiLiAiLab/ConsDeepSignaling">Code</a>
 							</div>
 							<p></p>
@@ -383,7 +365,10 @@
 
 						<li itemscope itemtype="http://schema.org/CreativeWork">
 							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">Investigate the relevance of major signaling pathways in cancer survival using a biologically meaningful deep learning model</span>
+							<span itemprop="name">
+								Investigate the relevance of major signaling pathways in cancer survival using a
+								biologically meaningful deep learning model
+							</span>
 							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
 								Jiarui Feng, <b>Heming Zhang</b>, Fuhai Li
 							</div>
@@ -391,7 +376,8 @@
 								BMC Bioinformatics, 2020
 							</div>
 							<div>
-								<a class="btn btn-primary btn-outline btn-xs" href="https://link.springer.com/article/10.1186/s12859-020-03850-6">PDF</a>
+								<a class="btn btn-primary btn-outline btn-xs"
+									href="https://link.springer.com/article/10.1186/s12859-020-03850-6">PDF</a>
 								<a class="btn btn-primary btn-outline btn-xs" href="https://github.com/fuhaililab/DeepSurvivalAnalysis">Code</a>
 							</div>
 							<p></p>
@@ -399,7 +385,10 @@
 
 						<li itemscope itemtype="http://schema.org/CreativeWork">
 							<i class="fa-li" aria-hidden="true"></i>
-							<span itemprop="name">Predicting Tumor Cell Response to Synergistic Drug Combinations Using a Novel Simplified Deep Learning Model</span>
+							<span itemprop="name">
+								Predicting Tumor Cell Response to Synergistic Drug Combinations Using a Novel
+								Simplified Deep Learning Model
+							</span>
 							<div class="pub-authors" itemprop="author" style="color:#3271a5;font-size:17px">
 								<b>Heming Zhang</b>, Jiarui Feng, Amanda Zeng, Philip Payne, Fuhai Li
 							</div>
@@ -408,7 +397,8 @@
 							</div>
 							<div>
 								<a class="btn btn-primary btn-outline btn-xs" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8075535/">PDF</a>
-								<a class="btn btn-primary btn-outline btn-xs" href="https://github.com/FuhaiLiAiLab/DeepSignalingSynergy">Code</a>
+								<a class="btn btn-primary btn-outline btn-xs"
+									href="https://github.com/FuhaiLiAiLab/DeepSignalingSynergy">Code</a>
 							</div>
 							<p></p>
 						</li>
@@ -450,11 +440,11 @@
 										<strong>April 2025 - Present</strong>
 									</p>
 									<p class="project-funding" style="color:#3271a5;font-size:14px;margin-bottom:15px;">
-										Funded by 
-										<a href="https://reporter.nih.gov/search/WZNx9BCmU0WcBDCPEnIErQ/project-details/10659993">NLM R01 LM013902</a>; 
-										<a href="https://reporter.nih.gov/search/WZNx9BCmU0WcBDCPEnIErQ/project-details/10745189">NIA R21 AG078799</a>; 
-										<a href="https://reporter.nih.gov/search/WZNx9BCmU0WcBDCPEnIErQ/project-details/10228346">NIA R56 AG065352</a>; 
-										<a href="https://reporter.nih.gov/search/WZNx9BCmU0WcBDCPEnIErQ/project-details/11173681">NINDS RM1 NS132962</a>
+										Funded by
+										<a href="https://reporter.nih.gov/project-details/10659993">NLM R01 LM013902</a>;
+										<a href="https://reporter.nih.gov/project-details/10745189">NIA R21 AG078799</a>;
+										<a href="https://reporter.nih.gov/project-details/10228346">NIA R56 AG065352</a>;
+										<a href="https://reporter.nih.gov/project-details/11173681">NINDS RM1 NS132962</a>
 									</p>
 								</div>
 							</div>
@@ -472,11 +462,11 @@
 										<strong>February 2024 - Present</strong>
 									</p>
 									<p class="project-funding" style="color:#3271a5;font-size:14px;margin-bottom:15px;">
-										Funded by 
-										<a href="https://reporter.nih.gov/search/WZNx9BCmU0WcBDCPEnIErQ/project-details/10659993">NLM R01 LM013902</a>; 
-										<a href="https://reporter.nih.gov/search/WZNx9BCmU0WcBDCPEnIErQ/project-details/10745189">NIA R21 AG078799</a>; 
-										<a href="https://reporter.nih.gov/search/WZNx9BCmU0WcBDCPEnIErQ/project-details/10228346">NIA R56 AG065352</a>; 
-										<a href="https://reporter.nih.gov/search/WZNx9BCmU0WcBDCPEnIErQ/project-details/11173681">NINDS RM1 NS132962</a>
+										Funded by
+										<a href="https://reporter.nih.gov/project-details/10659993">NLM R01 LM013902</a>;
+										<a href="https://reporter.nih.gov/project-details/10745189">NIA R21 AG078799</a>;
+										<a href="https://reporter.nih.gov/project-details/10228346">NIA R56 AG065352</a>;
+										<a href="https://reporter.nih.gov/project-details/11173681">NINDS RM1 NS132962</a>
 									</p>
 								</div>
 							</div>
@@ -497,11 +487,11 @@
 					<ul class="fa-ul">
 						<li>
 							<i class="fa-li fa fa-envelope fa-2x" aria-hidden="true"></i>
-							<span><a href="mailto:hemingzhang@wustl.edu">hemingzhang@wustl.edu</a></span>
+							<span><a href="mailto:hzhang79@bwh.harvard.edu">hzhang79@bwh.harvard.edu</a></span>
 						</li>
 						<li>
 							<i class="fa-li fa fa-map-marker fa-2x" aria-hidden="true"></i>
-							<span>Washington University in St. Louis</span>
+							<span>Brigham and Women's Hospital, Harvard Medical School</span>
 						</li>
 					</ul>
 				</div>
@@ -512,7 +502,7 @@
 
 	<footer class="site-footer">
 		<div class="container">
-			<p>Last Update: 09/29/2025</p>
+			<p>Last Update: 08/19/2026</p>
 			<p class="powered-by">
 				&copy; Heming Zhang &middot;
 				Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic
